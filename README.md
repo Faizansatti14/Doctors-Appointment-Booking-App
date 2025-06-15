@@ -53,9 +53,24 @@ app/
 2. Open the project in Android Studio
 3. Sync Gradle files
 4. Configure Firebase:
-   - Add your `google-services.json` file to the app directory
-   - Enable Firebase Database in your Firebase Console
+   - Create a new project in [Firebase Console](https://console.firebase.google.com/)
+   - Add an Android app to your Firebase project with package name `com.example.doctor_appointmentapp`
+   - Download the `google-services.json` file
+   - Replace the existing `google-services.json` in the `app` directory with your downloaded file
+   - Make sure to update the Firebase API key in `app/google-services.json` with your own API key
 5. Build and run the application
+
+## Firebase Setup
+
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Create a new project or use an existing one
+3. Add an Android app to your project:
+   - Package name: `com.example.doctor_appointmentapp`
+   - App nickname: "Doctor Appointment App" (or any name you prefer)
+   - Debug signing certificate SHA-1: (optional for development)
+4. Download the `google-services.json` file
+5. Place the downloaded file in the `app` directory of your project
+6. The `google-services.json` file should contain your Firebase configuration, including the API key
 
 ## Requirements
 
@@ -63,6 +78,7 @@ app/
 - JDK 8 or newer
 - Android SDK 26 or higher
 - Google Play Services
+- Firebase project with API key
 
 ## Contributing
 
