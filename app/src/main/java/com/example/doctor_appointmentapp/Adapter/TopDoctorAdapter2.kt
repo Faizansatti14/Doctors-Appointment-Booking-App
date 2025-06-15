@@ -1,0 +1,58 @@
+package com.example.doctor_appointmentapp.Adapter
+
+import android.content.Intent
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.request.RequestOptions
+import com.example.doctor_appointmentapp.Activity.DetailActivity
+import com.example.doctor_appointmentapp.Domain.CategoryModel
+import com.example.doctor_appointmentapp.Domain.DoctorsModel
+import com.example.doctor_appointmentapp.databinding.ViewholderCategoryBinding
+import com.example.doctor_appointmentapp.databinding.ViewholderTopDoctor2Binding
+import com.example.doctor_appointmentapp.databinding.ViewholderTopDoctorBinding
+import com.google.firebase.database.core.Context
+import kotlin.contracts.contract
+
+ class TopDoctorAdapter2(val items: MutableList<DoctorsModel>) :
+    RecyclerView.Adapter<TopDoctorAdapter2.Viewholder>() {
+    //private var context:Context?=null
+
+    class Viewholder(val binding: ViewholderTopDoctor2Binding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopDoctorAdapter2.Viewholder {
+        val context = parent.context
+        val binding =
+            ViewholderTopDoctor2Binding.inflate(LayoutInflater.from(context), parent, false)
+        return Viewholder(binding)
+    }
+
+    override fun onBindViewHolder(holder: TopDoctorAdapter2.Viewholder, position: Int) {
+        holder.binding.nameTxt.text = items[position].Name
+        holder.binding.specialTxt.text = items[position].Special
+        holder.binding.scoreTxt.text = items[position].Rating.toString()
+        holder.binding.ratingBar.rating=items[position].Rating.toFloat()
+        holder.binding.scoreTxt.text=items[position].Rating.toString()
+        holder.binding.degreeTxt.text="Professional Doctor"
+
+        Glide.with(holder.itemView.context)
+            .load(items[position].Picture)
+            .apply { RequestOptions().transform(CenterCrop()) }
+            .into(holder.binding.img)
+
+        holder.binding.makeBtn.setOnClickListener {
+            val intent=Intent(holder.itemView.context,DetailActivity::class.java)
+            intent.putExtra("object",items[position])
+            holder.itemView.context.startActivity(intent)
+        }
+    }
+     override fun getItemCount(): Int {
+         return items.size
+     }
+
+ }
